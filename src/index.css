@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* Dark mode: toggled by .dark class on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ===== Design token CSS variables ===== */
+:root {
+  --bg: #f0f2f6;
+  --surface: #ffffff;
+  --surface-hover: #f5f7fa;
+  --border: #e2e8f0;
+  --border-strong: #c8d4e3;
+  --foreground: #111827;
+  --muted: #6b7280;
+  --muted-soft: #9ca3af;
+  --accent: #3b82f6;
+  --brand: #2a9d8f;
+  --error: #ef4444;
+  --warn: #f59e0b;
+  --ok: #10b981;
+}
+
+.dark {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface-hover: #21262d;
+  --border: #30363d;
+  --border-strong: #484f58;
+  --foreground: #e6edf3;
+  --muted: #8b949e;
+  --muted-soft: #6e7681;
+  --accent: #58a6ff;
+  --brand: #2fc0b0;
+  --error: #f87171;
+  --warn: #fbbf24;
+  --ok: #34d399;
+}
+
+/* ===== Map CSS variables → Tailwind color utilities ===== */
+@theme inline {
+  --color-app-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-soft: var(--muted-soft);
+  --color-accent: var(--accent);
+  --color-brand: var(--brand);
+  --color-error: var(--error);
+  --color-warn: var(--warn);
+  --color-ok: var(--ok);
+
+  /* Custom animations */
+  --animate-fade-in-up: fadeInUp 0.18s ease both;
+  --animate-slide-down: slideDown 0.13s ease both;
+  --animate-fade-in: fadeIn 0.18s ease both;
+
+  /* Custom font stack */
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', ui-monospace, monospace;
+}
+
+/* ===== Custom keyframes ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== Global smooth color transitions for dark mode toggle ===== */
+*,
+*::before,
+*::after {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* ===== Mapbox map container – Mapbox manages its own canvas sizing ===== */
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== Panel – reused across InfoCard, DebugPanel, Legend, App ===== */
+@layer components {
+  .panel {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 0.875rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+}

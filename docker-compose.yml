@@ -1,0 +1,11 @@
+services:
+  app:
+    image: unlockland-assignment:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_MAPBOX_ACCESS_TOKEN: ${VITE_MAPBOX_ACCESS_TOKEN:?Set VITE_MAPBOX_ACCESS_TOKEN in .env}
+    restart: unless-stopped
